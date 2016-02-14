@@ -1,0 +1,15 @@
+= form_for @company do |f|
+  - if @company.errors.any?
+    #error_explanation
+      %h2= pluralize(@company.errors.count, "error")
+      "Veuillez remplir tous les champs obligatoires"
+      %ul 
+        - @company.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label :name, 'name'
+  = f.text_field :name
+
+  = f.label :address, 'address'
+  = f.text_field :address
+
+  = f.submit 'créer une entreprise'
