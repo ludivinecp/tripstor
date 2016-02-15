@@ -1,0 +1,30 @@
+%p#notice= notice
+
+= @company.name
+= @company.address
+
+= form_for @comment do |f|
+  - if @comment.errors.any?
+    #error_explanation
+      %h2= pluralize(@comment.errors.count, "error")
+      "Veuillez remplir tous les champs obligatoires"
+      %ul 
+        - @comment.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label :title, 'titre'
+  = f.text_field :title
+
+  = f.label :etoiles, 'étoiles'
+  = f.number_field :stars
+
+  = f.label :comment, 'comment'
+  = f.text_area :comment
+
+  = f.hidden_field :nickname, :value => current_user.nickname
+
+  = f.submit 'Ajouter un commentaire'
+
+
+= link_to 'Edit', edit_company_path(@company)
+\|
+= link_to 'Back', companies_path
